@@ -1,6 +1,6 @@
 name: CI/CD Pipeline
 
-on: 
+on:
   push:
     branches: [ "main" ]
 
@@ -13,19 +13,18 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/Checkout@v4
+        uses: actions/checkout@v4
 
       - name: Login to GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: $ {{ github.actor }}
-          password: $
-{{ secrets.GITHUB_TOKEN }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push
-        used: docker/build-push-action@v5
+      - name: Build and Push
+        uses: docker/build-push-action@v5
         with:
           context: ./app
           push: true
-          tags: ghcr.io/nehalreal-devops-project:latest
+          tags: ghcr.io/nehal456/real-devops-project:latest
