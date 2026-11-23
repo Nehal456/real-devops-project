@@ -25,6 +25,6 @@ jobs:
       - name: Build and Push
         uses: docker/build-push-action@v5
         with:
-          context: ./app
+          context: .             # <--- CHANGED THIS FROM ./app TO .
           push: true
           tags: ghcr.io/nehal456/real-devops-project:latest
