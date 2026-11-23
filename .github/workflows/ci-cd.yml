@@ -1,25 +1,31 @@
-name: Build and Push Docker image
-on:
+name: CI/CD Pipeline
+
+on: 
   push:
-    branch: [ "main" ]
+    branches: [ "main" ]
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     permissions:
-      contests: read
+      contents: read
       packages: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/Checkout@v4
 
-      - name: Log in to the GHCR
-        run: echo "$
-{{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ {{ github.actor }} --password-stdin
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: $ {{ github.actor }}
+          password: $
+{{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
-        run: | 
-          cd app
-          docker build -t ghcr.io/nehal456/real-devops-project:latest .
-          docker push ghcr.io/nehal456/real-devops-project:latest
+      - name: Build and push
+        used: docker/build-push-action@v5
+        with:
+          context: ./app
+          push: true
+          tags: ghcr.io/nehalreal-devops-project:latest
