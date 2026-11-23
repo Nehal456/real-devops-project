@@ -12,9 +12,9 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: action/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Log in to the Conatiner@v3
+      - name: Log in to the Conatiner
 registry
         run: echo "$
 {{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ {{ github.actor }} --password-stdin
