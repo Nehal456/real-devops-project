@@ -1,0 +1,31 @@
+nam: Build and push Docker Image
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  REGISTERY: ghcr.io
+  IMAGE_NAME: ${{ github.respository }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contests: read
+      packages: write
+
+    steps:
+      - name: Checkout respository
+        uses: actions/checkout@v3
+
+      - name: Log in to the the Container
+  {{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        user: docker/build-push-action@v4
+        with:
+          context: ./app
+          push: true
+          tags: $ {{ env.REGISTERY }}/$
+  {{ env.IMAGE_NAME }}:latest
