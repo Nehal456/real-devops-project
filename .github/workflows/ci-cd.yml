@@ -1,12 +1,7 @@
-nam: Build and push Docker Image
-
+name: Build and Push Docker image
 on:
   push:
-    branches: [ "main" ]
-
-env:
-  REGISTERY: ghcr.io
-  IMAGE_NAME: ${{ github.respository }}
+    branch: [ "main" ]
 
 jobs:
   build-and-push:
@@ -16,16 +11,16 @@ jobs:
       packages: write
 
     steps:
-      - name: Checkout respository
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: action/checkout@v3
 
-      - name: Log in to the the Container
-  {{ secrets.GITHUB_TOKEN }}
+      - name: Log in to the Conatiner@v3
+registry
+        run: echo "$
+{{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ {{ github.actor }} --password-stdin
 
       - name: Build and push Docker image
-        user: docker/build-push-action@v4
-        with:
-          context: ./app
-          push: true
-          tags: $ {{ env.REGISTERY }}/$
-  {{ env.IMAGE_NAME }}:latest
+        run: | 
+          cd app
+          docker build -t ghcr.io/nehal456/real-devops-project:latest .
+          docker push ghcr.io/nehal456/real-devops-project:latest
