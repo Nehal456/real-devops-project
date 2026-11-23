@@ -14,8 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Log in to the Conatiner
-registry
+      - name: Log in to the GHCR
         run: echo "$
 {{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ {{ github.actor }} --password-stdin
 
