@@ -32,3 +32,8 @@ project-phoenik/
     └── templates/          # Kubernetes manifests
         ├── app.yaml        # Flask Deployment & Service
         └── db.yaml         # PostgreSQL Deployment & Service
+
+Issue: Upon the initial push to GitHub, a warning was generated indicating a file size exceeding 50MB (the Terraform Helm provider binary).
+Resolution: Realized that the .terraform directory was accidentally committed. Created a .gitignore file to exclude .terraform/, .tfstate, and .tfvars files, then used git rm -r --cached .terraform to untrack the directory without deleting it locally.
+
+
