@@ -36,4 +36,10 @@ project-phoenik/
 Issue: Upon the initial push to GitHub, a warning was generated indicating a file size exceeding 50MB (the Terraform Helm provider binary).
 Resolution: Realized that the .terraform directory was accidentally committed. Created a .gitignore file to exclude .terraform/, .tfstate, and .tfvars files, then used git rm -r --cached .terraform to untrack the directory without deleting it locally.
 
+## 🔄 GitOps Continuous Delivery (ArgoCD)
+To achieve a true GitOps workflow, I deployed ArgoCD to the Kubernetes cluster. 
+1. ArgoCD was configured to monitor the `helm-chart` directory in this GitHub repository.
+2. Automatic Sync and Self-Heal policies were enabled. 
+3. **Result:** Any manual changes made to the cluster (e.g., deleting a pod) are automatically reverted by ArgoCD to match the desired state defined in Git.
 
+**Troubleshooting Note:** During initial setup, ArgoCD failed to sync due to a namespace case-sensitivity error (`namespaces "Default" not found`). I resolved this by updating the destination namespace in the ArgoCD Application manifest to lowercase (`default`).
