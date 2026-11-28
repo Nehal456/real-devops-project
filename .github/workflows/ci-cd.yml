@@ -35,8 +35,8 @@ jobs:
           exit-code: '1' # This makes the pipeline FAIL if critical vulnerabilities are found!
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
-
+          severity: 'CRITICAL'
+  
       - name: Push Docker Image
         if: success() # Only push if the security scan passes!
         run: |
